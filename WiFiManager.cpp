@@ -185,6 +185,40 @@ bool WiFiManager::addParameter(WiFiManagerParameter *p) {
 }
 
 /**
+ * [removeParameter description]
+ * @access public
+ * @param {[type]} WiFiManagerParameter *p [description]
+ */
+bool WiFiManager::removeParameter(WiFiManagerParameter *p) {
+
+  // find matching parameter
+  int i;
+  for (i = _paramsCount - 1; i >= 0; i--) {
+    if (_params[i] == p) break;
+  }
+  
+  // not found
+  if (i == -1) {
+    #ifdef WM_DEBUG_LEVEL
+    DEBUG_WM(WM_DEBUG_ERROR,F("[ERROR] cannot find existing parameter to remove"));
+    #endif
+    return false;
+  }
+
+  // shift remaining parameters
+  for (; i < _paramsCount - 1; i++) {
+    _params[i] = _params[i + 1];
+  }
+  _paramsCount--;
+
+  return true;
+}
+
+void WiFiManager::removeAllParameters() {
+  _paramsCount = 0;
+}
+
+/**
  * [getParameters description]
  * @access public
  */

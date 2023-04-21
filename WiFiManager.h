@@ -293,6 +293,12 @@ class WiFiManager
     //adds a custom parameter, returns false on failure
     bool          addParameter(WiFiManagerParameter *p);
 
+    // removes a custom parameter, returns false if not found
+    bool          removeParameter(WiFiManagerParameter *p);
+
+    // removes all custom parameters
+    void          removeAllParameters();
+
     //returns the list of Parameters
     WiFiManagerParameter** getParameters();
 
